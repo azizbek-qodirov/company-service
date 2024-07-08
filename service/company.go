@@ -8,7 +8,7 @@ import (
 
 type CompanyService struct {
 	storage st.Storage
-	cp.UnimplementedResumeServiceServer
+	cp.UnimplementedCompanyServiceServer
 }
 
 func NewCompanyService(storage *st.Storage) *CompanyService {

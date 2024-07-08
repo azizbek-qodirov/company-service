@@ -8,7 +8,7 @@ import (
 
 type DepartmentService struct {
 	storage st.Storage
-	cp.UnimplementedResumeServiceServer
+	cp.UnimplementedDepartmentServiceServer
 }
 
 func NewDepartmentService(storage *st.Storage) *DepartmentService {

@@ -8,7 +8,7 @@ import (
 
 type PositionService struct {
 	storage st.Storage
-	cp.UnimplementedResumeServiceServer
+	cp.UnimplementedPositionServiceServer
 }
 
 func NewPositionService(storage *st.Storage) *PositionService {
