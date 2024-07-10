@@ -83,9 +83,9 @@ func (e *EvaluationStorage) GetAll(req *pb.EvaluationGetAllReq) (*pb.EvaluationG
 	count := 1
 	var arr []interface{}
 	query := `
-		SELECT id, evaluator_id, employee_id, rating, comment
+		SELECT evaluator_id, employee_id, SUM(rating) AS total_rating, comment
 		FROM evaluations
-		WHERE deleted_at IS NULL
+		WHERE deleted_at = 0
 	`
 	if len(req.EmployeeId) > 0 {
 		query += fmt.Sprintf(" AND employee_id=$%d", count)
@@ -93,7 +93,7 @@ func (e *EvaluationStorage) GetAll(req *pb.EvaluationGetAllReq) (*pb.EvaluationG
 		arr = append(arr, req.EmployeeId)
 	}
 	if len(req.EvaluatorId) > 0 {
-		query += fmt.Sprintf(" AND evaluator_id=$%d", count)
+		query += fmt.Sprintf(" AND evaluator_id=$%d GROUP BY evaluator_id, employee_id, comment", count)
 		count++
 		arr = append(arr, req.EvaluatorId)
 	}
@@ -108,7 +108,7 @@ func (e *EvaluationStorage) GetAll(req *pb.EvaluationGetAllReq) (*pb.EvaluationG
 	var evaluations []*pb.EvaluationUpdate
 	for rows.Next() {
 		var evaluation pb.EvaluationUpdate
-		if err := rows.Scan(&evaluation.Id, &evaluation.EvaluatorId, &evaluation.EmployeeId, &evaluation.Rating, &evaluation.Comment); err != nil {
+		if err := rows.Scan(&evaluation.EvaluatorId, &evaluation.EmployeeId, &evaluation.Rating, &evaluation.Comment); err != nil {
 			return nil, err
 		}
 		evaluations = append(evaluations, &evaluation)
