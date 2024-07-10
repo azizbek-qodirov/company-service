@@ -3,7 +3,7 @@ package main
 import (
 	cf "company/config"
 	cp "company/genprotos"
-	"company/service"
+	service "company/service"
 	"company/storage/postgres"
 	"log"
 	"net"

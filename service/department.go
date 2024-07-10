@@ -18,21 +18,21 @@ func NewDepartmentService(storage *st.Storage) *DepartmentService {
 }
 
 func (s *DepartmentService) Create(ctx context.Context, req *cp.DepartmentCreateReq) (*cp.DepartmentRes, error) {
-	return nil, nil
+	return s.storage.DepartmentS.Create(req)
 }
 
 func (s *DepartmentService) GetById(ctx context.Context, id *cp.Byid) (*cp.DepartmentGetByIdRes, error) {
-	return nil, nil
+	return s.storage.DepartmentS.GetById(id)
 }
 
 func (s *DepartmentService) GetAll(ctx context.Context, req *cp.DepartmentGetAllReq) (*cp.DepartmentGetAllRes, error) {
-	return nil, nil
+	return s.storage.DepartmentS.GetAll(req)
 }
 
 func (s *DepartmentService) Update(ctx context.Context, req *cp.DepartmentUpdateReq) (*cp.DepartmentRes, error) {
-	return nil, nil
+	return s.storage.DepartmentS.Update(req)
 }
 
 func (s *DepartmentService) Delete(ctx context.Context, id *cp.Byid) (*cp.Void, error) {
-	return nil, nil
+	return s.storage.DepartmentS.Delete(id)
 }

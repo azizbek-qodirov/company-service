@@ -18,21 +18,21 @@ func NewCompanyService(storage *st.Storage) *CompanyService {
 }
 
 func (s *CompanyService) Create(ctx context.Context, req *cp.CompanyCreateReq) (*cp.CompanyRes, error) {
-	return nil, nil
+	return s.storage.CompanyS.Create(req)
 }
 
 func (s *CompanyService) GetById(ctx context.Context, id *cp.Byid) (*cp.CompanyGetByIdRes, error) {
-	return nil, nil
+	return s.storage.CompanyS.GetById(id)
 }
 
 func (s *CompanyService) GetAll(ctx context.Context, req *cp.CompanyGetAllReq) (*cp.CompanyGetAllRes, error) {
-	return nil, nil
+	return s.storage.CompanyS.GetAll(req)
 }
 
 func (s *CompanyService) Update(ctx context.Context, req *cp.CompanyUpdateReq) (*cp.CompanyRes, error) {
-	return nil, nil
+	return s.storage.CompanyS.Update(req)
 }
 
 func (s *CompanyService) Delete(ctx context.Context, id *cp.Byid) (*cp.Void, error) {
-	return nil, nil
+	return s.storage.CompanyS.Delete(id)
 }
