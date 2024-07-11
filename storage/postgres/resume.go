@@ -123,7 +123,7 @@ func (r *ResumeRepo) GetAll(req *cp.ResumeGetAllReq) (*cp.ResumeGetAllRes, error
 		args = append(args, req.Education)
 	}
 	if len(conditions) != 0 {
-		query += strings.Join(conditions, " AND ")
+		query += " AND " + strings.Join(conditions, " AND ")
 	}
 
 

@@ -118,7 +118,7 @@ func (d *DepartmentRepo) GetAll(req *cp.DepartmentGetAllReq) (*cp.DepartmentGetA
 		args = append(args, req.CompanyId)
 	}
 	if len(conditions) != 0 {
-		query += strings.Join(conditions, " AND ")
+		query += " AND " + strings.Join(conditions, " AND ")
 	}
 
 

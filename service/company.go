@@ -4,6 +4,7 @@ import (
 	cp "company/genprotos"
 	st "company/storage/postgres"
 	"context"
+	"fmt"
 )
 
 type CompanyService struct {
@@ -26,6 +27,10 @@ func (s *CompanyService) GetById(ctx context.Context, id *cp.Byid) (*cp.CompanyG
 }
 
 func (s *CompanyService) GetAll(ctx context.Context, req *cp.CompanyGetAllReq) (*cp.CompanyGetAllRes, error) {
+	fmt.Println(req.Address)
+	fmt.Println(req.Name)
+	fmt.Println(req.Industry)
+	fmt.Println(req.Website)
 	return s.storage.CompanyS.GetAll(req)
 }
 

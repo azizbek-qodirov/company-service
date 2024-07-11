@@ -139,9 +139,8 @@ func (c *CompanyRepo) GetAll(req *cp.CompanyGetAllReq) (*cp.CompanyGetAllRes, er
 		args = append(args, req.Website)
 	}
 	if len(conditions) != 0 {
-		query += strings.Join(conditions, " AND ")
+		query += " AND " + strings.Join(conditions, " AND ")
 	}
-
 
 	var defaultLimit int64
 	err := c.db.QueryRow("SELECT COUNT(1) FROM companies WHERE deleted_at=0").Scan(&defaultLimit)

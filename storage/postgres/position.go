@@ -120,7 +120,7 @@ func (p *PositionRepo) GetAll(req *cp.PositionGetAllReq) (*cp.PositionGetAllRes,
 		args = append(args, req.DepartmentId)
 	}
 	if len(conditions) != 0 {
-		query += strings.Join(conditions, " AND ")
+		query += " AND " + strings.Join(conditions, " AND ")
 	}
 
 
