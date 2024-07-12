@@ -31,7 +31,7 @@ func (p *PositionRepo) Create(req *cp.PositionCreateReq) (*cp.PositionRes, error
 		title,
 		description,
 		department_id
-	) VALUES ($1, $2, $3)
+	) VALUES ($1, $2, $3, $4)
 	RETURNING
 		id,
 		title,
