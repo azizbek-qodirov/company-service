@@ -1,26 +1,27 @@
-# Stage 1: Build the Go binary
-FROM golang:1.22.2-alpine AS builder
+FROM golang:1.22.1 AS builder
 
 WORKDIR /app
 
-RUN apk add --no-cache git
-
-COPY go.mod go.sum ./
-
+COPY go.mod .
+COPY go.sum .
 RUN go mod download
 
 COPY . .
 
-RUN go build -o main ./main.go
+COPY .env .  
 
-FROM alpine:3.16
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o myapp .
+
+FROM alpine:latest
 
 WORKDIR /app
 
-COPY --from=builder /app/main .
+COPY --from=builder /app/myapp .
+COPY --from=builder /app/config/model.conf ./config/
+COPY --from=builder /app/config/policy.csv ./config/
 
-COPY .env .
+COPY --from=builder /app/.env .
 
-RUN chmod +x ./main
+EXPOSE 8080
 
-CMD ["./main"]
+CMD ["./myapp"]

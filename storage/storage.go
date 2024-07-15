@@ -33,3 +33,34 @@ type ResumeI interface {
 	Update(*cp.ResumeUpdateReq) (*cp.ResumeRes, error)
 	Delete(*cp.Byid) (*cp.Void, error)
 }
+
+type InitRoot interface {
+	Evaluation() EvaluationStorage
+	Guide() GuideStorage
+	Notification() NotificationStorage
+}
+
+type EvaluationStorage interface {
+	GetAll(req *cp.EvaluationGetAllReq) (*cp.EvaluationGetAllRes, error)
+	Delete(req *cp.Byid) (*cp.Void, error)
+	Update(req *cp.EvaluationUpdate) (*cp.Void, error)
+	Get(req *cp.Byid) (*cp.EvaluationUpdate, error)
+	Create(req *cp.EvaluationCreate) (*cp.Void, error)
+}
+
+type GuideStorage interface {
+	CreateGuide(req *cp.CreateGuideRequest) (*cp.Void, error)
+	GetGuide(req *cp.GetGuideRequest) (*cp.GuideResponse, error)
+	UpdateGuide(req *cp.UpdateGuideRequest) (*cp.Void, error)
+	DeleteGuide(req *cp.DeleteGuideRequest) (*cp.Void, error)
+	ListAllGuides(req *cp.ListAllGuidesRequest) (*cp.ListAllGuidesResponse, error)
+	SearchGuides(req *cp.SearchGuidesRequest) (*cp.ListAllGuidesResponse, error)
+}
+
+type NotificationStorage interface {
+	Create(notification *cp.CreateNotification) (*cp.Void, error)
+	GetByUserId(request *cp.GetAllRequest) (*cp.GetAllResponse, error)
+	ReadeAll(request *cp.ReadeAllRequest) (*cp.Void, error)
+	SendAll(request *cp.SendByCompanyidToUsers) (*cp.Void, error)
+	SendAllUsers(request *cp.SendByCompanyidToUsers) (*cp.Void, error)
+}

@@ -7,19 +7,18 @@ run:
 init:
 	go mod init
 	go mod tidy 
-	go mod vendor
 
 proto-gen:
 	./scripts/gen-proto.sh ${CURRENT_DIR}
 	
 migrate_up:
-	migrate -path migrations -database postgres://postgres:1111@localhost:5432/staffer?sslmode=disable -verbose up
+	migrate -path migrations -database postgres://mrbek:QodirovCoder@localhost:5432/staffer_db?sslmode=disable -verbose up
 
 migrate_down:
-	migrate -path migrations -database postgres://postgres:1111@localhost:5432/staffer?sslmode=disable -verbose down
+	migrate -path migrations -database postgres://mrbek:QodirovCoder@localhost:5432/staffer_db?sslmode=disable -verbose down
 
 migrate_force:
-	migrate -path migrations -database postgres://postgres:1111@localhost:5432/staffer?sslmode=disable -verbose force 1
+	migrate -path migrations -database postgres://mrbek:QodirovCoder@localhost:5432/staffer_db?sslmode=disable -verbose force 1
 
 migrate_file:
 	migrate create -ext sql -dir migrations -seq create_table

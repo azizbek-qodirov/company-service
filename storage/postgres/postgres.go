@@ -10,11 +10,15 @@ import (
 )
 
 type Storage struct {
-	Db        *sql.DB
-	CompanyS storage.CompanyI
+	Db          *sql.DB
+	CompanyS    storage.CompanyI
 	DepartmentS storage.DepartmentI
-	PositionS storage.PositionI
-	ResumeS storage.ResumeI
+	PositionS   storage.PositionI
+	ResumeS     storage.ResumeI
+
+	Evaluations   storage.EvaluationStorage
+	Guides        storage.GuideStorage
+	Notifications storage.NotificationStorage
 }
 
 func NewPostgresStorage(config config.Config) (*Storage, error) {
@@ -34,12 +38,33 @@ func NewPostgresStorage(config config.Config) (*Storage, error) {
 	department := NewDepartmentRepo(db)
 	position := NewPositionRepo(db)
 	resume := NewResumeRepo(db)
-	
+
 	return &Storage{
-		Db:        db,
-		CompanyS: company,
+		Db:          db,
+		CompanyS:    company,
 		DepartmentS: department,
-		PositionS: position,
-		ResumeS: resume,
+		PositionS:   position,
+		ResumeS:     resume,
 	}, nil
+}
+
+func (s *Storage) Evaluation() storage.EvaluationStorage {
+	if s.Evaluations == nil {
+		s.Evaluations = &EvaluationStorage{s.Db}
+	}
+	return s.Evaluations
+}
+
+func (s *Storage) Guide() storage.GuideStorage {
+	if s.Guides == nil {
+		s.Guides = &GuideStorage{s.Db}
+	}
+	return s.Guides
+}
+
+func (s *Storage) Notification() storage.NotificationStorage {
+	if s.Notifications == nil {
+		s.Notifications = &NotificationStorage{s.Db}
+	}
+	return s.Notifications
 }

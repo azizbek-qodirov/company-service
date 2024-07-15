@@ -32,6 +32,9 @@ func main() {
 	cp.RegisterDepartmentServiceServer(s, service.NewDepartmentService(db))
 	cp.RegisterPositionServiceServer(s, service.NewPositionService(db))
 	cp.RegisterResumeServiceServer(s, service.NewResumeService(db))
+	cp.RegisterServiceNotificationServer(s, service.NewNotificationService(db))
+	cp.RegisterEvaulationServiceServer(s, service.NewEvaluationService(db))
+	cp.RegisterGuideServiceServer(s, service.NewGuideService(db))
 
 	log.Printf("server listening at %v", listener.Addr())
 	if err := s.Serve(listener); err != nil {
