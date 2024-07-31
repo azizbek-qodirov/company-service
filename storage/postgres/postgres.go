@@ -10,11 +10,11 @@ import (
 )
 
 type Storage struct {
-	Db        *sql.DB
-	CompanyS storage.CompanyI
+	Db          *sql.DB
+	CompanyS    storage.CompanyI
 	DepartmentS storage.DepartmentI
-	PositionS storage.PositionI
-	ResumeS storage.ResumeI
+	PositionS   storage.PositionI
+	ResumeS     storage.ResumeI
 }
 
 func NewPostgresStorage(config config.Config) (*Storage, error) {
@@ -34,12 +34,12 @@ func NewPostgresStorage(config config.Config) (*Storage, error) {
 	department := NewDepartmentRepo(db)
 	position := NewPositionRepo(db)
 	resume := NewResumeRepo(db)
-	
+
 	return &Storage{
-		Db:        db,
-		CompanyS: company,
+		Db:          db,
+		CompanyS:    company,
 		DepartmentS: department,
-		PositionS: position,
-		ResumeS: resume,
+		PositionS:   position,
+		ResumeS:     resume,
 	}, nil
 }
